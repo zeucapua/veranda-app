@@ -4,11 +4,10 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "prisma generate && prisma migrate deploy && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "vercel-build": "prisma generate && prisma migrate deploy && vite build"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
