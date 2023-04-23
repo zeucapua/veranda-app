@@ -24,4 +24,17 @@ export const actions = {
       return fail(502, { message: "There's been a problem posting. Try again."} ); 
     }
   },
+  clapPost: async ({ request }) => {
+    const data = await request.formData();
+    const post_id = data.get("post_id");
+    
+    const post = await prisma.post.update({
+      where: { id: post_id },
+      data: { claps: { increment: 1 } }
+    });
+
+    if (!post) { 
+      return fail(502, { message: "Cannot clap right now. Try again." });
+    }
+  }
 }

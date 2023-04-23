@@ -29,6 +29,7 @@
 		"@next-auth/prisma-adapter": "^1.0.6",
 		"@prisma/client": "^4.13.0",
 		"next-auth": "^4.22.1",
+		"svelte-confetti": "^1.2.2",
 		"timeago.js": "^4.0.2"
 	}
 }

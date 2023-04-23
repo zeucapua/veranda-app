@@ -1,25 +1,41 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { format } from "timeago.js";
+  import { enhance } from "$app/forms";
   import type { Post, User } from "@prisma/client";
 
   export let post : Post;
   export let user : User;
+  
+  let claps : number;
 
-  let duration = format(post.createdAt)
+  onMount(() => { claps = post.claps; });
+  
+  function onClap() { claps += 1; } 
+
+  let duration = format(post.createdAt);
 </script>
 
 <div class="flex flex-row gap-8 items-center">
   <a href={`/u/${user.id}`}>
     <img src={user.image} alt={`${user.name}`} class="w-16 h-16 rounded-full"/>
   </a>
-  <a href={`/p/${post.id}`}>
-    <div class="flex flex-col gap-2">
-      <p class="text-neutral-400">
+  <div class="flex flex-col">
+    <a href={`/p/${post.id}`}>
+      <p class="text-neutral-400 pb-2">
         <a href={`/u/${user.id}`}>@{user.name}</a> 
         | {duration}
       </p>
       <p class="text-xl text-white">{post.content}</p>
-      <button></button>
-    </div>
-  </a>
+    </a>
+    <form method="POST" action="?/clapPost" use:enhance>
+      <input name="post_id" type="hidden" value={post.id} />
+      <button 
+        class="relative text-white font-bold px-3 py-2 hover:bg-neutral-400/10 rounded-full" 
+        on:click={onClap}
+      >
+        👏 {#if !claps}...{:else}{claps}{/if}
+      </button>
+    </form>
+  </div>
 </div>
