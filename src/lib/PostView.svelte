@@ -17,10 +17,10 @@
 </script>
 
 <div class="flex flex-row gap-8 items-center">
-  <a href={`/u/${user.id}`}>
+  <a href={`/u/${user.id}`} class="btn btn-ghost btn-circle avatar">
     <img src={user.image} alt={`${user.name}`} class="w-16 h-16 rounded-full"/>
   </a>
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-2">
     <a href={`/p/${post.id}`}>
       <p class="text-neutral-400 pb-2">
         <a href={`/u/${user.id}`}>@{user.name}</a> 
@@ -31,7 +31,7 @@
     <form method="POST" action="?/clapPost" use:enhance>
       <input name="post_id" type="hidden" value={post.id} />
       <button 
-        class="relative text-white font-bold px-3 py-2 hover:bg-neutral-400/10 rounded-full" 
+        class="btn btn-outline btn-secondary rounded-full" 
         on:click={onClap}
       >
         👏 {#if !claps}...{:else}{claps}{/if}

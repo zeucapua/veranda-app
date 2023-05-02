@@ -10,12 +10,12 @@
 
 
 {#if user}
-  <form method="POST" action="?/createPost" class="flex flex-row gap-8">
+  <form method="POST" action="?/createPost" class="flex flex-row gap-8 items-center">
     <img src={user?.image} alt={`${user?.name} Profile Picture`} 
       class="w-0 h-0 md:w-16 md:h-16 md:rounded-full"/>
     <input 
       type="text" name="content" placeholder="Share with your friends..." 
-      class="grow bg-zinc-800 py-2 px-4 text-white"/>
+      class="grow input input-bordered input-primary"/>
   </form>
 {/if}
 
