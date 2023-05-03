@@ -2,7 +2,10 @@ import { prisma } from "$lib/prisma";
 import { fail } from "@sveltejs/kit";
 
 export async function load({ locals }) {
-  const posts = await prisma.post.findMany({ include: { user: true }});
+  const posts = await prisma.post.findMany({ 
+    orderBy: { createdAt: 'desc' },
+    include: { user: true }
+  });
   return { posts };
 }
 
